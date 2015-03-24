@@ -1,0 +1,92 @@
+import java.io.*; 
+import java.net.*; 
+import java.util.Scanner;
+public class TCPClient { 
+
+    public static void main(String argv[]) throws Exception { 
+        String sentence, dtext, modifiedSentence, hostname;
+        int port;
+        boolean start = true, Quit = false;
+        
+        Scanner sc = new Scanner(System.in);
+		System.out.println("Enter port number (xxxx): "); 
+		port = sc.nextInt();
+		System.out.println("Enter IP address (Ex 192.168.0.1): "); 
+		hostname = sc.next();
+		
+		System.out.println();
+		System.out.println("Write the number of the command you want to perform:");
+		System.out.println("1. Read");
+		System.out.println("2. Tare");
+		System.out.println("3. Zero");
+		System.out.println("4. Display Text");
+		System.out.println("5. Display Weight");
+		System.out.println("7. Quit");
+		
+
+        BufferedReader inFromUser = 
+          new BufferedReader(new InputStreamReader(System.in)); 
+
+        Socket clientSocket = new Socket(hostname, port); 
+
+        DataOutputStream outToServer = 
+          new DataOutputStream(clientSocket.getOutputStream());
+        
+        BufferedReader inFromServer = 
+                new BufferedReader(new
+                InputStreamReader(clientSocket.getInputStream())); 
+        
+        
+        
+        while(start) {
+        	sentence = inFromUser.readLine();
+        	System.out.println();
+              
+            	if(sentence.equals("1")) {
+            		outToServer.writeBytes("S\r\n");
+            		modifiedSentence = inFromServer.readLine();
+            		System.out.println("REPLY FROM SERVER: " + modifiedSentence);  
+            	}
+            	else if (sentence.equals("2")) {
+                	 outToServer.writeBytes("T\r\n");
+                	 modifiedSentence = inFromServer.readLine();
+                	 System.out.println("REPLY FROM SERVER: " + modifiedSentence);
+            	}
+            	else if (sentence.equals("3")) {
+                	outToServer.writeBytes("Z\r\n");
+                	modifiedSentence = inFromServer.readLine();
+                	System.out.println("REPLY FROM SERVER: " + modifiedSentence);
+            	}
+            	else if (sentence.equals("4")) {
+                	System.out.println("Indtast din besked: ");
+                	dtext = inFromUser.readLine();
+                	outToServer.writeBytes("D " + dtext + "\r\n");
+                	modifiedSentence = inFromServer.readLine();
+                  	System.out.println("REPLY FROM SERVER: " + modifiedSentence);
+            	}
+            	else if (sentence.equals("5")) {
+                	outToServer.writeBytes("DW\r\n");
+                	modifiedSentence = inFromServer.readLine();
+                   	System.out.println("REPLY FROM SERVER: " + modifiedSentence);
+            	}
+            	else if (sentence.equals("7")) {
+                		clientSocket.close();
+                		System.out.println("BYE BYE");
+                		start = false;
+                		Quit = true;
+                }
+            	if(Quit == false) {
+            		System.out.println();
+            		System.out.println("Write the number of the command you want to perform:");
+            		System.out.println("1. Read");
+            		System.out.println("2. Tare");
+            		System.out.println("3. Zero");
+            		System.out.println("4. Display Text");
+            		System.out.println("5. Display Weight");
+            		System.out.println("7. Quit");
+            	}
+           	}
+        clientSocket.close();
+      	}
+              
+    }
