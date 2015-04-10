@@ -1,9 +1,11 @@
-package FTP;
+package cdio.pkg2;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import org.apache.commons.net.ftp.FTPClient;
 
 public class Main {
@@ -12,7 +14,7 @@ public class Main {
 		FileOutputStream fos = null;
 		
 		try {
-			client.connect("192.168.11.49");
+			client.connect("192.168.11.49", 21);
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -21,7 +23,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		try {
-			client.login("root","root");
+			client.login("emre","1234");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,6 +43,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+             
 		try {
 			fos.close();
 		} catch (IOException e1) {
