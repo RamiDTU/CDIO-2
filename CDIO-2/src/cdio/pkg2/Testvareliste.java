@@ -10,25 +10,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Rami
  */
-public class Testvareliste  {
+public class Testvareliste {
 
     public static void main(String[] arg) throws IOException {
-        
-    ArrayList<vareliste> vareTypeListe;
+
+        ArrayList<vareliste> vareTypeListe;
         vareTypeListe = new ArrayList<vareliste>();
+        boolean fundet = false;
 
         BufferedReader ind = new BufferedReader(new FileReader("store.txt"));
         String linje = ind.readLine();
         int vareNummer = 0;
         String vareNavn = null;
         int weight = 0;
-        while (linje
-                != null) {
+        while (linje != null) {
             String[] bidder = linje.split(",");     // opdel i bidder efter komma
             vareNummer = Integer.parseInt(bidder[0]);
             vareNavn = bidder[1]; // brug første bid
@@ -40,10 +39,21 @@ public class Testvareliste  {
             vt.weight = weight;
 
             vareTypeListe.add(vt);
-
+//contentEquals
             linje = ind.readLine();
             System.out.println("Læst: " + vt.toString());
-
+            if (!vareTypeListe.isEmpty()) {
+                for (int i = 0; i < vareTypeListe.size(); i++) {
+                    if (vareTypeListe.get(i).vareNavn.startsWith("")) {
+                        System.out.println("works");
+                        fundet = true;
+                        return;
+                    }
+            }
+            }
         }
-    } 
+            if(!fundet){
+                System.out.println("it doesnt ");
+                }
+    }
 }
