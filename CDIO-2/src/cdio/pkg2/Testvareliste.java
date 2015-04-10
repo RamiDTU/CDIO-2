@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -18,6 +19,16 @@ public class Testvareliste {
 
     public static void main(String[] arg) throws IOException {
 
+        Scanner tastatur = new Scanner(System.in);
+     
+     System.out.println("Velkommen til Testvareliste Build 1.01");
+        System.out.println();
+        
+                System.out.println("-----------------------------------------------");
+                System.out.println("Indtast det ønskede varenavn: ");
+                String input = tastatur.nextLine().toLowerCase();
+                //tastatur.nextLine();
+        
         ArrayList<vareliste> vareTypeListe;
         vareTypeListe = new ArrayList<vareliste>();
         boolean fundet = false;
@@ -39,12 +50,12 @@ public class Testvareliste {
             vt.weight = weight;
 
             vareTypeListe.add(vt);
-//contentEquals
+
             linje = ind.readLine();
             System.out.println("Læst: " + vt.toString());
             if (!vareTypeListe.isEmpty()) {
                 for (int i = 0; i < vareTypeListe.size(); i++) {
-                    if (vareTypeListe.get(i).vareNavn.startsWith("")) {
+                    if (vareTypeListe.get(i).vareNavn.startsWith(input)) {
                         System.out.println("works");
                         fundet = true;
                         return;
