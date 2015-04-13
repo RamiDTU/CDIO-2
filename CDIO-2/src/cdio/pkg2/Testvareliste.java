@@ -21,8 +21,9 @@ import java.util.Scanner;
 public class Testvareliste {
 
     public static void main(String[] arg) throws IOException, Exception {
-        int port = 4567;
-	String hostname = "localhost";
+        int port = 4567, vægt = 0;
+	String hostname = "localhost", modifiedSentence;
+        boolean run = true;
          BufferedReader inFromUser = 
           new BufferedReader(new InputStreamReader(System.in)); 
 
@@ -37,11 +38,11 @@ public class Testvareliste {
         System.out.println("Connected to scale");
         
         vareliste List = new vareliste();
+        Scanner indtastning = new Scanner(System.in);
         
         
-           while (true) {
+           while (run) {
           System.out.println("Indtast venligst dit operatør nummer");
-                    Scanner indtastning = new Scanner(System.in);
                     String kode = indtastning.next();
                     List.OperatørNr(kode); // kode for at logge ind som montør
            
@@ -52,7 +53,7 @@ public class Testvareliste {
         System.out.println("Indtastning af skandinaviske bogstaver, ae, oe, aa");
         System.out.println();
         
-         while (true) {
+         while (run) {
                 System.out.println("-----------------------------------------------");
                 System.out.println("Indtast det ønskede varenavn: ");
                 String input = tastatur.nextLine().toLowerCase();
@@ -85,24 +86,42 @@ public class Testvareliste {
             if (!vareTypeListe.isEmpty()) {
                 for (int i = 0; i < vareTypeListe.size(); i++) {
                     if (vareTypeListe.get(i).vareNavn.startsWith(input)) {
-                        System.out.println("Fundet");
+                        vægt = Integer.parseInt(bidder[2]);
+                        System.out.println("Vi Fandt det ønskede vare: "+vareNavn+" "+Integer.parseInt(bidder[2])+" kg");
+                        //System.out.println("Fundet");
                         fundet = true;
-                        return;
+                        run = false;
                     }
+                   
+                    } 
+                if(fundet == true){
+                        break;
             }
             }
         }
             if(!fundet){
                 System.out.println("Eksisterer ikke");
                 }
-    }
+    
+         }
     }
     
     else {
         System.out.println();
     }
            }
-           
+           //Instruér operatør om at påsætte skål eller lignende og kvittere bagefter
+             System.out.println("Saet en skaal eller lignende på vaegten.");
+             System.out.println("Tryk vilkaarlig tast og enter, når du er klar til at tera'ere");
+             String temp = indtastning.next();
+             System.out.println("Vaegten bliver tera'eret");
+             /*outToServer.writeBytes("T\r\n");
+                 modifiedSentence = inFromServer.readLine();
+                 System.out.println("REPLY FROM SERVER: " + modifiedSentence);*/
+                 
+           String netto = String.valueOf(vægt); 
+           System.out.println(netto);
+           outToServer.writeBytes("B " + netto + "\r\n");
            
 }
 }
