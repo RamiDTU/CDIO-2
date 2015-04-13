@@ -27,11 +27,11 @@ public class Testvareliste {
            
     if (login.OperatørNr()==true) {
         Scanner tastatur = new Scanner(System.in);
-     
+  
      System.out.println("Velkommen til Testvareliste Build 1.01");
         System.out.println("Indtastning af skandinaviske bogstaver, ae, oe");
         System.out.println();
-        
+         while (true) {
                 System.out.println("-----------------------------------------------");
                 System.out.println("Indtast det ønskede varenavn: ");
                 String input = tastatur.nextLine().toLowerCase();
@@ -75,6 +75,7 @@ public class Testvareliste {
                 System.out.println("it doesnt ");
                 }
     }
+    }
     
     else {
         System.out.println("Venligst indtast gyldig operatør nummer");
@@ -83,3 +84,4 @@ public class Testvareliste {
 }
 }
 }
+
