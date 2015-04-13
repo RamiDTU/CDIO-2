@@ -18,10 +18,18 @@ import java.util.Scanner;
 public class Testvareliste {
 
     public static void main(String[] arg) throws IOException {
-
+          vareliste login = new vareliste();
+           while (true) {
+          System.out.println("Indtast venligt dit operatør nummer");
+                    Scanner indtastning = new Scanner(System.in);
+                    String kode = indtastning.next();
+                    login.OperatørNr(kode); // kode for at logge ind som montør
+           
+    if (login.OperatørNr()==true) {
         Scanner tastatur = new Scanner(System.in);
      
      System.out.println("Velkommen til Testvareliste Build 1.01");
+        System.out.println("Indtastning af skandinaviske bogstaver, ae, oe");
         System.out.println();
         
                 System.out.println("-----------------------------------------------");
@@ -67,4 +75,11 @@ public class Testvareliste {
                 System.out.println("it doesnt ");
                 }
     }
+    
+    else {
+        System.out.println("Venligst indtast gyldig operatør nummer");
+    }
+    
+}
+}
 }
