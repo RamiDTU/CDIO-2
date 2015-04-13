@@ -6,8 +6,11 @@
 package cdio.pkg2;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,20 +20,38 @@ import java.util.Scanner;
  */
 public class Testvareliste {
 
-    public static void main(String[] arg) throws IOException {
-          vareliste login = new vareliste();
+    public static void main(String[] arg) throws IOException, Exception {
+        int port = 4567;
+	String hostname = "localhost";
+         BufferedReader inFromUser = 
+          new BufferedReader(new InputStreamReader(System.in)); 
+
+        Socket clientSocket = new Socket(hostname, port); 
+
+        DataOutputStream outToServer = 
+          new DataOutputStream(clientSocket.getOutputStream());
+        
+        BufferedReader inFromServer = 
+                new BufferedReader(new
+                InputStreamReader(clientSocket.getInputStream()));
+        System.out.println("Connected to scale");
+        
+        vareliste List = new vareliste();
+        
+        
            while (true) {
-          System.out.println("Indtast venligt dit operatør nummer");
+          System.out.println("Indtast venligst dit operatør nummer");
                     Scanner indtastning = new Scanner(System.in);
                     String kode = indtastning.next();
-                    login.OperatørNr(kode); // kode for at logge ind som montør
+                    List.OperatørNr(kode); // kode for at logge ind som montør
            
-    if (login.OperatørNr()==true) {
+    if (List.OperatørNr()==true) {
         Scanner tastatur = new Scanner(System.in);
   
      System.out.println("Velkommen til Testvareliste Build 1.01");
-        System.out.println("Indtastning af skandinaviske bogstaver, ae, oe");
+        System.out.println("Indtastning af skandinaviske bogstaver, ae, oe, aa");
         System.out.println();
+        
          while (true) {
                 System.out.println("-----------------------------------------------");
                 System.out.println("Indtast det ønskede varenavn: ");
@@ -64,7 +85,7 @@ public class Testvareliste {
             if (!vareTypeListe.isEmpty()) {
                 for (int i = 0; i < vareTypeListe.size(); i++) {
                     if (vareTypeListe.get(i).vareNavn.startsWith(input)) {
-                        System.out.println("works");
+                        System.out.println("Fundet");
                         fundet = true;
                         return;
                     }
@@ -72,16 +93,17 @@ public class Testvareliste {
             }
         }
             if(!fundet){
-                System.out.println("it doesnt ");
+                System.out.println("Eksisterer ikke");
                 }
     }
     }
     
     else {
-        System.out.println("Venligst indtast gyldig operatør nummer");
+        System.out.println();
     }
-    
-}
+           }
+           
+           
 }
 }
 

@@ -5,14 +5,15 @@ import java.util.Scanner;
 public class TCPClient { 
 
     public static void main(String argv[]) throws Exception { 
+       
         String sentence, dtext, modifiedSentence, x1, atext1, atext2, atext3, text1, text2, text3;
         int port = 4567;
 	String hostname = "localhost"; 
         boolean start = true, Quit = false, rm20 = true;
         
         Scanner sc = new Scanner(System.in);
-		
-		
+                System.out.println("You're connected to the scale, please choose an option below: ");
+
 		System.out.println();
 		System.out.println("Please choose one of the following options: ");
 		System.out.println("1. Read");
