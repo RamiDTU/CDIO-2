@@ -68,6 +68,7 @@ public class Testvareliste {
         int vareNummer = 0;
         String vareNavn = null;
         int weight = 0;
+        
         while (linje != null) {
             String[] bidder = linje.split(",");     // opdel i bidder efter komma
             vareNummer = Integer.parseInt(bidder[0]);
@@ -119,9 +120,18 @@ public class Testvareliste {
                  modifiedSentence = inFromServer.readLine();
                  System.out.println("REPLY FROM SERVER: " + modifiedSentence);*/
                  
-           String netto = String.valueOf(vægt); 
-           System.out.println(netto);
-           outToServer.writeBytes("B " + netto + "\r\n");
+           String netto = String.valueOf(vægt);
+           outToServer.writeBytes("B " + vægt + "\r\n");
+           modifiedSentence = inFromServer.readLine();
+           System.out.println("REPLY FROM SERVER: " + modifiedSentence);
+           
+           System.out.println("Vægten bliver nulstillet.");
+           outToServer.writeBytes("Z\r\n");
+           modifiedSentence = inFromServer.readLine();
+           System.out.println("REPLY FROM SERVER: " + modifiedSentence);
+           
+           
+           
            
 }
 }
