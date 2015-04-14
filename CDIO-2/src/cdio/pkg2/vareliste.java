@@ -19,7 +19,7 @@ import java.util.Scanner;
  * @author Rami
  */
 public class vareliste {
-private boolean OperatÃ¸rNr;
+private boolean OperatørNr;
     
     
     int vareNummer;
@@ -44,8 +44,8 @@ private boolean OperatÃ¸rNr;
         }
     }
 
-    public boolean OperatÃ¸rNr() {
-        return OperatÃ¸rNr;
+    public boolean OperatørNr() {
+        return OperatørNr;
     }
 
 
